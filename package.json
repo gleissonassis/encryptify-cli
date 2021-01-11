@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "cryptr": "^6.0.2",
+    "encryptify-lib": "0.0.1",
     "eth-crypto": "^1.8.0",
     "is-binary-path": "^2.1.0",
     "istextorbinary": "^5.12.0",

@@ -1,6 +1,4 @@
-import IdentityHelper from './helpers/IdentityHelper.js';
-import FileHelper from './helpers/FileHelper.js';
-
+import { IdentityHelper, FileHelper } from 'encryptify-lib';
 
 export default class Program {
   constructor () {
