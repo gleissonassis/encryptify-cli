@@ -105,7 +105,7 @@ export default class Program {
       decryptedFileContent = ih.decrypt(secret, encryptedFile);
     }
 
-    const decryptedBuffer = Buffer.from(decryptedFileContent, 'hex')
+    const decryptedBuffer = Buffer.from(decryptedFileContent, 'hex');
 
     const encoding = e || fh.detectEncoding(decryptedBuffer) ? 'binary' : 'utf8';
 
