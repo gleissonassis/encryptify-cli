@@ -63,15 +63,13 @@ export default class Program {
     let content = m;
 
     if (m === undefined) {
-      const encoding = e || fh.isBinaryPath(s) ? 'binary' : 'utf8';
-
-      content = await fh.openFile(s, encoding);
+      content = await fh.openFile(s);
     }
 
     let encryptedFileContent = null;
 
     if (!t) {
-      encryptedFileContent = await ih.encryptWithPublicKey(identity.compressedPublicKey, content);
+      encryptedFileContent = await ih.encryptWithPublicKey(identity.compressedPublicKey, content.toString('hex'));
     } else {
       const secret = ih.computeSecret(identity.privateKey, t);
       encryptedFileContent = ih.encrypt(secret, content);
@@ -107,10 +105,12 @@ export default class Program {
       decryptedFileContent = ih.decrypt(secret, encryptedFile);
     }
 
-    const encoding = e || fh.detectEncoding(decryptedFileContent) ? 'binary' : 'utf8';
+    const decryptedBuffer = Buffer.from(decryptedFileContent, 'hex')
+
+    const encoding = e || fh.detectEncoding(decryptedBuffer) ? 'binary' : 'utf8';
 
     if (m === undefined) {
-      await fh.writeFile(o, decryptedFileContent, encoding);
+      await fh.writeFile(o, decryptedBuffer, encoding);
       console.log(`File decrypted sucessfully!`);
     } else {
       console.log(decryptedFileContent);
